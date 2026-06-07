@@ -1,0 +1,7 @@
+{
+  "name": "neko-hq",
+  "version": "0.1.0",
+  "type": "module",
+  "bin": { "neko-hq": "bin/neko-hq.mjs" },
+  "scripts": { "test": "node --test tests/neko-hq.test.mjs" }
+}
