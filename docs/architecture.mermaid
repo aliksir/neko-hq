@@ -1,0 +1,48 @@
+graph TB
+    HQ["neko-HQ<br/>Unified CLI"]
+
+    subgraph core["Cat Army"]
+        GUNDAN["gundan<br/>neko-gundan"]
+    end
+
+    subgraph defense["Quality &amp; Defense"]
+        DOCTOR["doctor<br/>neko-harness-doctor"]
+        SECRET["secret<br/>neko-not-yoshi"]
+        KENSA["kensa<br/>neko-kensa"]
+    end
+
+    subgraph monitor["Monitoring"]
+        MCP["mcp<br/>mcp-yoshi"]
+    end
+
+    subgraph logistics["Logistics"]
+        HEALTH["health<br/>health-yoshi"]
+        RELEASE["release<br/>release-yoshi"]
+        LICENSE["license<br/>license-yoshi"]
+        PII["pii<br/>pii-mask-yoshi"]
+        RESCUE["rescue<br/>neko-rescue"]
+    end
+
+    subgraph infra["Shared Infrastructure"]
+        STATS[("stats.jsonl<br/>Schema v1.1")]
+        POLICY[("~/.neko-policy/<br/>6 policy files")]
+    end
+
+    HQ --> core
+    HQ --> defense
+    HQ --> monitor
+    HQ --> logistics
+
+    SECRET -.->|"NGword dict"| PII
+    PII -.->|"session map"| SECRET
+    MCP -.->|"BLOCK/WARN"| STATS
+    PII -.->|"masked count"| STATS
+    LICENSE -.->|"forbidden/caution"| STATS
+    SECRET -.->|"findings"| STATS
+    HEALTH -.->|"unhealthy"| STATS
+    HQ -->|"read"| STATS
+    HQ -->|"validate"| POLICY
+
+    style HQ fill:#e74c3c,color:#fff,stroke:#c0392b
+    style STATS fill:#2c3e50,color:#fff
+    style POLICY fill:#2c3e50,color:#fff
